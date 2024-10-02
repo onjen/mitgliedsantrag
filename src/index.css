@@ -1,7 +1,5 @@
 :root {
   font-family: Arial, sans-serif;
-  /* line-height: 1.5;
-  font-weight: 400; */
 
   color-scheme: only light;
   font-synthesis: none;
@@ -12,33 +10,13 @@
 
 body {
   margin: 0;
-  /* display: flex;
-  /* place-items: center; */
-  /* min-width: 320px;
-  min-height: 100vh; */ 
 }
-
-
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
 
 .only-Print {
   display: none;
 }
 
 @media print {
-
-
   :root {
     font-size: 10pt;
   }
