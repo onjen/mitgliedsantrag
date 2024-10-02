@@ -27,13 +27,14 @@ function App() {
       <div>
         <h1>Antrag auf Mitgliedschaft </h1>
         <div>
-        <p>
-          Hier mit beantrage ich die Mitgliedschaft im Erfindergeist Jülich zum
-          nächstmöglichen Zeitpunkt. Ich habe die Vereinssatzung gelesen und bin
-          mit der Einhaltung derer einverstanden. Mir ist bewusst, dass mit der
-          Annahme des Antrages eine Einladung zu den Kommunikation- &
-          Co-Working-Apps erfolgen und die Bildrechte abgegeben werden.{" "}
-        </p>
+          <p>
+            Hier mit beantrage ich die Mitgliedschaft im Erfindergeist Jülich
+            e.V. zum nächstmöglichen Zeitpunkt. Ich habe die Vereinssatzung
+            gelesen und bin mit der Einhaltung derer einverstanden. Mir ist
+            bewusst, dass mit der Annahme des Antrages eine Einladung zu den
+            Kommunikation- & Co-Working-Apps erfolgen und die Bildrechte
+            abgegeben werden.{" "}
+          </p>
         </div>
         {/* <h2>Mitgliedsbeitragsmodelle (Bitte ankreuzen):</h2> */}
         <table>
@@ -87,7 +88,7 @@ function App() {
               />
             </td>
           </tr>
-          <tr >
+          <tr>
             <td>
               <p>- Förder Mitgliedschaft: 2. Juristische Personen</p>
             </td>
@@ -108,17 +109,16 @@ function App() {
           <tr>
             <td colSpan={3}>
               <p>
-              - Individuelle Förderung:<br/>
-                Ich fördere den Erfindergeist Jülich mit folgendem Betrag (in
-                Euro, pro Monat):
-              
-              <TextField
-                id="standard-basic"
-                label="Monats Beitrag"
-                variant="standard"
-                fullWidth
-              />
-              
+                - Individuelle Förderung:
+                <br />
+                Ich fördere den Erfindergeist Jülich e.V. mit folgendem Betrag
+                (in Euro, pro Monat):
+                <TextField
+                  id="standard-basic"
+                  label="Monats Beitrag"
+                  variant="standard"
+                  fullWidth
+                />
                 Dieser Betrag wird gesammelt, einmal jährlich überwiesen oder
                 abgebucht. Juristische Personen geben bitte den Namen einer
                 natürlichen Person als Vertreter an.
@@ -207,27 +207,24 @@ function App() {
           anmelden, siehe Vereinssatzung.
         </p>
         <p>
-          Alle Daten werden unter strenger Beachtung der EU-DSGVO, ausschließich
-          für vereinsinterne Zwecke vom Vorstand EDV-gestützt verarbeitet. Mit
-          der Bestätigung der Mitgliedschaft erhallten Sie eine Mitgliedsnummer,
-          die Sie in den Überweißungen als Verwendungszweck angeben müssen.
-          Bitte richten Sie einen Dauerauftrag ein oder nutzen Sie das Formular
-          für ein Lastschriftmandat. Kontoinhaberin: Erfindergeist Jülich e.V.
-          IBAN: DE20 3955 0110 1201 5533 00 BIC: SDUEDE33XXX Verwendungszweck:
-          Mitgliedsnummer (Wird Ihnen per E-Mail mitgeteilt)
+          Alle Daten werden unter strenger Beachtung der EU-DSGVO,
+          ausschließlich für vereinsinterne Zwecke vom Vorstand EDV-gestützt
+          verarbeitet. Mit der Bestätigung der Mitgliedschaft erhalten Sie eine
+          Mitgliedsnummer, die Sie in den Überweisungen als Verwendungszweck
+          angeben müssen. Bitte richten Sie einen Dauerauftrag ein oder nutzen
+          Sie das Formular für ein Lastschriftmandat. Kontoinhaberin:
+          Erfindergeist Jülich e.V. IBAN: DE20 3955 0110 1201 5533 00 BIC:
+          SDUEDE33XXX Verwendungszweck: Mitgliedsnummer (Wird Ihnen per E-Mail
+          mitgeteilt)
         </p>
-        
+
         <TextField
           id="standard-basic"
           label="Unterschrift"
           variant="standard"
           fullWidth
           disabled
-          />
-
-
-
-
+        />
         <h1>Freiwillige angaben </h1>
         <ul>
           <li>
@@ -269,24 +266,26 @@ function App() {
             <FormControlLabel value="Nein" control={<Radio />} label="Nein" />
           </RadioGroup>
         </FormControl>
-
       </div>
 
       <div>
         <h1>SEPA-Lastschriftmandat</h1>
         <p>
-          Hier mit ermächtige ich{" "}
-          <TextField
-            id="standard-basic"
-            label="Vorname Nachname"
-            variant="standard"
-          />{" "}
-          , dass der Erfindergeist Jülich mittels Lastschrift die im Antrag
+          Gläubiger-Identifikationsnummer: DE27ZZZ00002425162
+          Hier mit ermächtige ich, dass der Erfindergeist Jülich mittels Lastschrift die im Antrag
           angekreuzte Zahlung einziehen darf. Zugleich weise ich mein
-          Kreditinstitut an, die vom Erfindergeist Jülich auf mein Konto
-          gezogene Lastschrift einzulösen.{" "}
+          Kreditinstitut an, die vom Erfindergeist Jülich e.V. auf mein Konto
+          gezogene Lastschrift einzulösen.
         </p>
         <ul>
+          <li>
+            <TextField
+              id="standard-basic"
+              label="Kontoinhaber"
+              variant="standard"
+              fullWidth
+            />
+          </li>
           <li>
             <TextField
               id="standard-basic"
@@ -311,10 +310,29 @@ function App() {
               fullWidth
             />
           </li>
+          <li>
+            <TextField
+              id="standard-basic"
+              label="Unterschrift"
+              variant="standard"
+              fullWidth
+              disabled
+            />
+          </li>
         </ul>
-        Unterschrift Formular abschicken an: Erfindergeist Jülich Buchenweg 16
-        52399 Merzenich oder per E-Mail an:
-        <a href="mailto:kontakt@erfindergeist.org">kontakt@erfindergeist.org</a>
+        <p>
+          abschicken an: <br></br>
+          Erfindergeist Jülich e.V. <br></br>
+          Buchenweg 16 <br></br>
+          52399 Merzenich <br></br>
+          <br></br>
+          oder <br></br>
+          Persönlich bei uns in der{" "}
+          <a href="https://werkstatt.erfindergeist.org" target="_blank">
+            Werkstatt
+          </a>{" "}
+          abgeben.
+        </p>
       </div>
     </>
   );

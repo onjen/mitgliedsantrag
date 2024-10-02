@@ -37,8 +37,14 @@ body {
 }
 
 @media print {
+
+
   :root {
-    font-size: 12pt;
+    font-size: 10pt;
+  }
+
+  h1 { 
+    break-before: page; 
   }
 
   h1, h2, h3, h4, h5 {
@@ -46,6 +52,9 @@ body {
     padding: 0;
   }
 
+  table, figure {
+    break-inside: avoid;
+  }
   table {
     margin: 0;
     padding: 0;
