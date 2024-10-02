@@ -12,6 +12,10 @@ body {
   margin: 0;
 }
 
+h1 {
+  color: #F9B338;
+}
+
 .only-Print {
   display: none;
 }
@@ -23,7 +27,6 @@ body {
 
   h1 { 
     break-before: page; 
-    color: #F9B338;
   }
 
   h1, h2, h3, h4, h5 {
