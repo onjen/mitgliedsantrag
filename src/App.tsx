@@ -1,21 +1,52 @@
 import "./App.css";
 
 import {
+  Box,
   Button,
+  createTheme,
+  CssBaseline,
   FormControl,
   FormControlLabel,
+  PaletteColorOptions,
   Radio,
   RadioGroup,
   TextField,
+  ThemeProvider,
 } from "@mui/material";
 
-import ContributeTable from "./ContributeTable";
+import ContributeTable from "./components/ContributeTable";
+import AppBarWrapper from "./components/AppBarWrapper";
 
 function App() {
 
+  const primary: PaletteColorOptions = {
+    main: "#159989",
+    light: "#159989",
+    dark: "#159989",
+    contrastText: '#fff',
+  };
+
+  const secondary: PaletteColorOptions = {
+    main: "#F9B338",
+    light: "#F9B338",
+    dark: "#F9B338",
+    contrastText: '#000',
+  };
+
+  const theme = createTheme({
+    palette: {
+      primary: primary,
+      secondary: secondary,
+    },
+  });
+  
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
+    <Box sx={{ display: 'block' }}>
+      <CssBaseline />
+      <AppBarWrapper />
+      <Box component="main" sx={{ p: 3 }}>
       <h1>Antrag auf Mitgliedschaft </h1>
 
       <div>
@@ -30,102 +61,7 @@ function App() {
 
       <ContributeTable />
 
-      {/* <table>
-        <tr>
-          <th>
-            <p>Mitgliedsbeitragsmodell</p>
-          </th>
-          <th>
-            <p>Monatlich</p>
-          </th>
-          <th>
-            <p> Jährlich</p>
-          </th>
-          <th>
-            <p>Auswahl</p>
-          </th>
-        </tr>
-        <tr>
-          <td>
-            <p>- ordentliches Mitglied</p>
-          </td>
-          <td>
-            <p>10€</p>
-          </td>
-          <td>
-            <p>120€</p>
-          </td>
-          <td>
-            <RadioWrapper
-              checkValue="a"
-              selectedValue={selectedValue}
-              onChange={handleRadioChange}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>- Förder Mitgliedschaft:1. Natürliche Personen</p>
-          </td>
-          <td>
-            <p>10€</p>
-          </td>
-          <td>
-            <p>120€</p>
-          </td>
-          <td>
-            <RadioWrapper
-              checkValue="b"
-              selectedValue={selectedValue}
-              onChange={handleRadioChange}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>- Förder Mitgliedschaft: 2. Juristische Personen</p>
-          </td>
-          <td>
-            <p>15€</p>
-          </td>
-          <td>
-            <p>180€</p>
-          </td>
-          <td>
-            <RadioWrapper
-              checkValue="c"
-              selectedValue={selectedValue}
-              onChange={handleRadioChange}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td colSpan={3}>
-            <p>
-              - Individuelle Förderung:
-              <br />
-              Ich fördere den Erfindergeist Jülich e.V. mit folgendem Betrag (in
-              Euro, pro Monat):
-              <TextField
-                id="standard-basic"
-                label="Monats Beitrag"
-                variant="standard"
-                fullWidth
-              />
-              Dieser Betrag wird gesammelt, einmal jährlich überwiesen oder
-              abgebucht. Juristische Personen geben bitte den Namen einer
-              natürlichen Person als Vertreter an (Unternehmensname).
-            </p>
-          </td>
-          <td>
-            <RadioWrapper
-              checkValue="d"
-              selectedValue={selectedValue}
-              onChange={handleRadioChange}
-            />
-          </td>
-        </tr>
-      </table> */}
+     
 
       <ul>
         <li>
@@ -333,7 +269,9 @@ function App() {
           Drucken
         </Button>
       </div>
-    </>
+      </Box>
+    </Box>
+    </ThemeProvider>
   );
 }
 

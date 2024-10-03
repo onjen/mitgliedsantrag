@@ -8,6 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import RadioWrapper from "./RadioWrapper";
 import { TextField } from "@mui/material";
+import { useAppStore } from "../stores/appStore";
+import { useShallow } from "zustand/shallow";
 function createData(key: string, name: string, month: number) {
   return { key, name, month };
 }
@@ -20,19 +22,22 @@ const rows = [
 ];
 
 export default function ContributeTable() {
-  const [selectedValue, setSelectedValue] = React.useState<string>("nothing");
+  const [contributeValue, setContributeValue] = useAppStore(
+    useShallow((state) => [state.contributeValue, state.setContributeValue]),
+  )
+
   const handleRadioChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
     if (checked) {
-      setSelectedValue(event.target.value);
+      setContributeValue(event.target.value);
     }
   };
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="left">Mitgliedsbeitragsmodell</TableCell>
@@ -68,7 +73,7 @@ export default function ContributeTable() {
                   <TableCell align="right">
                     <RadioWrapper
                       checkValue={row.key}
-                      selectedValue={selectedValue}
+                      selectedValue={contributeValue}
                       onChange={handleRadioChange}
                     />
                   </TableCell>
@@ -88,7 +93,7 @@ export default function ContributeTable() {
                 <TableCell align="right">
                   <RadioWrapper
                     checkValue={row.key}
-                    selectedValue={selectedValue}
+                    selectedValue={contributeValue}
                     onChange={handleRadioChange}
                   />
                 </TableCell>
