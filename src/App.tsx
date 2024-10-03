@@ -16,6 +16,7 @@ import {
 
 import ContributeTable from "./components/ContributeTable";
 import AppBarWrapper from "./components/AppBarWrapper";
+import { PersonalDataList } from "./components/PersonalDataList";
 
 function App() {
 
@@ -60,74 +61,9 @@ function App() {
       </div>
 
       <ContributeTable />
-
      
-
-      <ul>
-        <li>
-          <TextField
-            id="standard-basic"
-            label="Unternehmensname"
-            variant="standard"
-            fullWidth
-          />
-        </li>
-
-        <li>
-          <TextField
-            id="standard-basic"
-            label="Name, Titel"
-            variant="standard"
-            fullWidth
-            required
-          />
-        </li>
-        <li>
-          <TextField
-            id="standard-basic"
-            label="Vorname"
-            variant="standard"
-            fullWidth
-            required
-          />
-        </li>
-        <li>
-          <TextField
-            id="standard-basic"
-            label="Straße, Hausnummer"
-            variant="standard"
-            fullWidth
-            required
-          />
-        </li>
-        <li>
-          <TextField
-            id="standard-basic"
-            label="PLZ, Ort"
-            variant="standard"
-            fullWidth
-            required
-          />
-        </li>
-        <li>
-          <TextField
-            id="standard-basic"
-            label="Telefon"
-            variant="standard"
-            fullWidth
-            required
-          />
-        </li>
-        <li>
-          <TextField
-            id="standard-basic"
-            label="E-Mail"
-            variant="standard"
-            fullWidth
-            required
-          />
-        </li>
-      </ul>
+      <PersonalDataList />
+      
 
       <div>
         <p>
