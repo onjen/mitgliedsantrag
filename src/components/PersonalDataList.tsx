@@ -1,40 +1,35 @@
 import { TextField } from "@mui/material";
-import { IFromKeys, useAppStore } from "../stores/appStore";
+import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
 
 export function PersonalDataList() {
-  const [form, setForm] = useAppStore(
-    useShallow((state) => [state.form, state.setForm])
+  const [formItems, updateFormItemValue] = useAppStore(
+    useShallow((state) => [state.formItems, state.updateFormItemValue])
   );
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, key: IFromKeys) {
-    form[key] = event.target.value
-    setForm(form)
-  }
-
   return (
-    <>
-    {JSON.stringify(form)}
     <ul>
-      {Object.keys(form).map((key) => {
+      {formItems.map((formItem) => {
         return (
-          <li key={key}>
+          <li key={formItem.key}>
             <TextField
               id="standard-basic"
-              label={key}
+              label={formItem.key}
               variant="standard"
               fullWidth
+              value={
+                formItems.find(
+                  (formItemFind) => formItemFind.key === formItem.key
+                )?.value
+              }
               onChange={(event) => {
-                setForm({
-                  ...form,
-                  
-                })
+                updateFormItemValue(formItem.key, event.target.value);
               }}
+              required={formItem.required}
             />
           </li>
         );
       })}
     </ul>
-    </>
   );
 }

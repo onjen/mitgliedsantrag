@@ -1,38 +1,34 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-
-export interface IForm {
-  Unternehmensname: string;
-  Nachname: string;
-  Vorname: string;
-  "Straße, Hausnummer": string;
-  "PLZ, Ort": string;
-  Telefon: string;
-  "E-Mail": string;
-}
-
-export type IFromKeys = keyof IForm;
-
-interface AppState {
-  contributeValue: string;
-  setContributeValue: (value: string) => void;
-  form: IForm;
-  setForm: (form: IForm) => void;
-}
+import { allowedFormKeys, requiredFormKeys } from "../models/AllowedFormKeys";
+import { getInitialFormItems } from "../utils/getInitialFormItems";
+import { AppState } from "../models/appState";
 
 export const useAppStore = create<AppState>()(
   immer((set) => ({
     contributeValue: "noting",
     setContributeValue: (value) => set({ contributeValue: value }),
-    form: {
-      Unternehmensname: "",
-      Nachname: "",
-      Vorname: "",
-      "Straße, Hausnummer": "",
-      "PLZ, Ort": "",
-      Telefon: "",
-      "E-Mail": "",
+    formItems: getInitialFormItems(allowedFormKeys, requiredFormKeys),
+    setFormItems: (formItems) => set({ formItems }),
+    updateFormItemValue: (key, value) => {
+      set((state) => {
+        const index = state.formItems.findIndex(
+          (formItem) => formItem.key === key
+        );
+        if (index !== -1) {
+          state.formItems[index].value = value;
+        }
+      });
     },
-    setForm: (form) => set({ form }),
+    toggleFormItemRequired: (key) => {
+      set((state) => {
+        const index = state.formItems.findIndex(
+          (formItem) => formItem.key === key
+        );
+        if (index !== -1) {
+          state.formItems[index].required = !state.formItems[index].required;
+        }
+      });
+    },
   }))
 );
