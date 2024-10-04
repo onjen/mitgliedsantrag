@@ -30,5 +30,7 @@ export const useAppStore = create<AppState>()(
         }
       });
     },
+    printModalIsOpen: false,
+    togglePrintModalIsOpen: () => set((state) => {state.printModalIsOpen = !state.printModalIsOpen})
   }))
 );

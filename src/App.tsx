@@ -17,8 +17,17 @@ import {
 import ContributeTable from "./components/ContributeTable";
 import AppBarWrapper from "./components/AppBarWrapper";
 import { PersonalDataList } from "./components/PersonalDataList";
+import { PrintModal } from "./components/PrintModal";
+import { useAppStore } from "./stores/appStore";
+import { useShallow } from "zustand/shallow";
 
 function App() {
+  const [togglePrintModalIsOpen] = useAppStore(
+    useShallow((state) => [
+      state.togglePrintModalIsOpen,
+    ])
+  );
+
   const primary: PaletteColorOptions = {
     main: "#159989",
     light: "#159989",
@@ -45,6 +54,7 @@ function App() {
       <Box sx={{ display: "block" }}>
         <CssBaseline />
         <AppBarWrapper />
+        <PrintModal />
         <Box component="main" sx={{ p: 3 }}>
           <h1>Antrag auf Mitgliedschaft </h1>
 
@@ -76,7 +86,9 @@ function App() {
               Verwendungszweck angeben müssen. Bitte richten Sie einen
               Dauerauftrag ein oder nutzen Sie das Formular für ein
               Lastschriftmandat.
-              <ul>
+
+            </p>
+            <ul>
                 <li>Kontoinhaberin: Erfindergeist Jülich e.V.</li>
                 <li>IBAN: DE20 3955 0110 1201 5533 00</li>
                 <li>BIC: SDUEDE33XXX </li>
@@ -85,7 +97,6 @@ function App() {
                   mitgeteilt)
                 </li>
               </ul>
-            </p>
             <TextField
               id="standard-basic"
               label="Unterschrift"
@@ -208,7 +219,7 @@ function App() {
           </div>
 
           <div className="no-print">
-            <Button variant="contained" onClick={() => window.print()}>
+            <Button variant="contained" onClick={() => togglePrintModalIsOpen()}>
               Drucken
             </Button>
           </div>

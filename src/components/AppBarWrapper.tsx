@@ -13,6 +13,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useAppStore } from "../stores/appStore";
+import { useShallow } from "zustand/shallow";
 
 
 
@@ -21,9 +23,17 @@ const drawerWidth = 240;
 export default function DrawerAppBar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const [togglePrintModalIsOpen] = useAppStore(
+    useShallow((state) => [
+      state.togglePrintModalIsOpen,
+    ])
+  );
+  
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+
 
   const title = "Erfindergeist Jülich e.V. Mitgliedsantrag";
 
@@ -36,7 +46,7 @@ export default function DrawerAppBar() {
       <List>
         <ListItem key={"print"} disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText primary={"Drucken"} onClick={() => window.print()}/>
+            <ListItemText primary={"Drucken"} onClick={() => togglePrintModalIsOpen()}/>
           </ListItemButton>
         </ListItem>
       </List>
@@ -66,7 +76,7 @@ export default function DrawerAppBar() {
             {title}
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button key={"print"} sx={{ color: "#fff" }} onClick={() => window.print()}>
+            <Button key={"print"} sx={{ color: "#fff" }} onClick={() => togglePrintModalIsOpen()}>
               Drucken
             </Button>
           </Box>
