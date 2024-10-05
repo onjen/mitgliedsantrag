@@ -1,6 +1,5 @@
 import {
   Accordion,
-  AccordionActions,
   AccordionDetails,
   AccordionSummary,
   Box,
@@ -9,32 +8,24 @@ import {
 } from "@mui/material";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
-import { ExpandMore, Print } from "@mui/icons-material";
+import { ExpandMore } from "@mui/icons-material";
 import { modalBoxStyle } from "../styles/styles";
 
-export function PrintModal() {
-  const [printModalIsOpen, togglePrintModalIsOpen] = useAppStore(
-    useShallow((state) => [
-      state.printModalIsOpen,
-      state.togglePrintModalIsOpen,
-    ])
+export function HelpModal() {
+  const [helpModalIsOpen, toggleHelpModalIsOpen] = useAppStore(
+    useShallow((state) => [state.helpModalIsOpen, state.toggleHelpModalIsOpen])
   );
-
-  function handlePrint(): void {
-    togglePrintModalIsOpen();
-    window.print();
-  }
 
   return (
     <Modal
-      open={printModalIsOpen}
-      onClose={togglePrintModalIsOpen}
+      open={helpModalIsOpen}
+      onClose={toggleHelpModalIsOpen}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       className="no-print"
     >
       <Box sx={modalBoxStyle}>
-        <h2>Drucken</h2>
+        <h2>Hilfe</h2>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMore />}
@@ -51,25 +42,39 @@ export function PrintModal() {
             Einstellungen" die "Kopf- und Fusszeilen"
           </AccordionDetails>
         </Accordion>
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMore />}
-            aria-controls="panel3-content"
-            id="panel3-header"
+            aria-controls="panel2-content"
+            id="panel2-header"
           >
-            Drucken
+            senden via E-Mail
           </AccordionSummary>
           <AccordionDetails>
-            Wir überlassen es Ihnen das Formular im Browser auszufüllen, es per
-            Hand auszufüllen oder gemischt ausfüllen.
+            Vollständig ausgefüllte Anträge können Sie auch als PDF Drucken und
+            uns direkt senden. Sie können auch von Hand den Antrag ausfüllen, im
+            anschluss Scannen und uns via E-Mail senden. E-Mail:{" "}
+            <a href="mailto:vorstand@erfindergeist.org">
+              vorstand@erfindergeist.org
+            </a>
           </AccordionDetails>
-          <AccordionActions>
-            <Button onClick={() => togglePrintModalIsOpen()}>Abbrechen</Button>
-            <Button variant="contained" onClick={() => handlePrint()} endIcon={<Print />}>
-              Drucken
-            </Button>
-          </AccordionActions>
         </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="panel2-content"
+            id="panel2-header"
+          >
+            senden via Post
+          </AccordionSummary>
+          <AccordionDetails>
+            Vollständig ausgefüllte Anträge können Sie an: xxx senden.
+          </AccordionDetails>
+        </Accordion>
+
+        <Button onClick={() => toggleHelpModalIsOpen()} fullWidth>
+          Schließen
+        </Button>
       </Box>
     </Modal>
   );

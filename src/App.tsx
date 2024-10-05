@@ -20,11 +20,15 @@ import { PersonalDataList } from "./components/PersonalDataList";
 import { PrintModal } from "./components/PrintModal";
 import { useAppStore } from "./stores/appStore";
 import { useShallow } from "zustand/shallow";
+import { BankAccountList } from "./components/BankAccountList";
+import { HelpModal } from "./components/HelpModal";
+import { SignatureModal } from "./components/SignaturModal";
 
 function App() {
-  const [togglePrintModalIsOpen] = useAppStore(
+  const [togglePrintModalIsOpen, toggleSignatureModalIsOpen] = useAppStore(
     useShallow((state) => [
       state.togglePrintModalIsOpen,
+      state.toggleSignatureModalIsOpen
     ])
   );
 
@@ -55,6 +59,9 @@ function App() {
         <CssBaseline />
         <AppBarWrapper />
         <PrintModal />
+        <HelpModal />
+        <SignatureModal />
+
         <Box component="main" sx={{ p: 3 }}>
           <h1>Antrag auf Mitgliedschaft </h1>
 
@@ -88,23 +95,20 @@ function App() {
               Lastschriftmandat.
 
             </p>
-            <ul>
-                <li>Kontoinhaberin: Erfindergeist Jülich e.V.</li>
-                <li>IBAN: DE20 3955 0110 1201 5533 00</li>
-                <li>BIC: SDUEDE33XXX </li>
-                <li>
-                  Verwendungszweck: Mitgliedsnummer (Wird Ihnen per E-Mail
-                  mitgeteilt)
-                </li>
-              </ul>
-            <TextField
-              id="standard-basic"
-              label="Unterschrift"
-              variant="standard"
-              fullWidth
-              disabled
-            />
           </div>
+
+          <BankAccountList/>
+          <TextField
+            id="standard-basic"
+            label="Unterschrift"
+            variant="standard"
+            fullWidth
+            
+            
+          />
+            <Button variant="contained" onClick={() => toggleSignatureModalIsOpen()}>
+              Signature
+            </Button>
 
           <h2>Freiwillige angaben </h2>
           <ul>

@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
+import { Help, Print } from "@mui/icons-material";
 
 
 
@@ -23,9 +24,10 @@ const drawerWidth = 240;
 export default function DrawerAppBar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const [togglePrintModalIsOpen] = useAppStore(
+  const [togglePrintModalIsOpen, toggleHelpModalIsOpen] = useAppStore(
     useShallow((state) => [
       state.togglePrintModalIsOpen,
+      state.toggleHelpModalIsOpen
     ])
   );
   
@@ -44,6 +46,11 @@ export default function DrawerAppBar() {
       </Typography>
       <Divider />
       <List>
+        <ListItem key={"help"} disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemText primary={"Hilfe"} onClick={() => toggleHelpModalIsOpen()}/>
+          </ListItemButton>
+        </ListItem>
         <ListItem key={"print"} disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText primary={"Drucken"} onClick={() => togglePrintModalIsOpen()}/>
@@ -76,7 +83,10 @@ export default function DrawerAppBar() {
             {title}
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button key={"print"} sx={{ color: "#fff" }} onClick={() => togglePrintModalIsOpen()}>
+            <Button key={"help"} sx={{ color: "#fff" }} onClick={() => toggleHelpModalIsOpen()} endIcon={<Help />}>
+              Hilfe
+            </Button>
+            <Button key={"print"} sx={{ color: "#fff" }} onClick={() => togglePrintModalIsOpen()} endIcon={<Print />}>
               Drucken
             </Button>
           </Box>
