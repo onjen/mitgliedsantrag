@@ -4,12 +4,16 @@ import { getInitialFormItems } from "../utils/getInitialFormItems";
 import { AppState } from "../models/appState";
 import { getInitialSignatureItems } from "../utils/getInitialSignatureItems";
 import { allowedFormKeys, requiredFormKeys } from "../const";
+import { AllowedFormKeys } from "../models/AllowedFormKeys";
 
 export const useAppStore = create<AppState>()(
-  immer((set) => ({
+  immer((set, get) => ({
     contributeValue: "noting",
     setContributeValue: (value) => set({ contributeValue: value }),
-    formItems: getInitialFormItems(allowedFormKeys, requiredFormKeys),
+    formItems: getInitialFormItems(
+      allowedFormKeys as unknown as AllowedFormKeys[],
+      requiredFormKeys
+    ),
     setFormItems: (formItems) => set({ formItems }),
     updateFormItemValue: (key, value) => {
       set((state) => {
@@ -32,18 +36,45 @@ export const useAppStore = create<AppState>()(
       });
     },
     signatures: getInitialSignatureItems(["form", "sepa"]),
-    printModalIsOpen: false,
-    togglePrintModalIsOpen: () => set((state) => {state.printModalIsOpen = !state.printModalIsOpen}),
-    helpModalIsOpen: false,
-    toggleHelpModalIsOpen: () => set((state) => {state.helpModalIsOpen = !state.helpModalIsOpen}),
-    signatureModalIsOpen: false,
-    signatureKey: "",
-    toggleSignatureModalIsOpen: (signatureKey) => set((state) => {
-      if(signatureKey) {
-        state.signatureKey = signatureKey;
+    updateSignatureItemDataURL: (dataURL) => {
+      set((state) => {
+        const index = state.signatures.findIndex(
+          (signature) => signature.key === state.signatureKey
+        );
+        if (index !== -1) {
+          state.signatures[index].dataURL = dataURL;
+        }
+      });
+    },
+    getSignatureItemDataURL: () => {
+      const index = get().signatures.findIndex(
+        (signature) => signature.key === get().signatureKey
+      );
+      if (index !== -1) {
+        return get().signatures[index].dataURL;
       }
-      
-      state.signatureModalIsOpen = !state.signatureModalIsOpen}
-    )
+
+      return "";
+    },
+    printModalIsOpen: false,
+    togglePrintModalIsOpen: () =>
+      set((state) => {
+        state.printModalIsOpen = !state.printModalIsOpen;
+      }),
+    helpModalIsOpen: false,
+    toggleHelpModalIsOpen: () =>
+      set((state) => {
+        state.helpModalIsOpen = !state.helpModalIsOpen;
+      }),
+    signatureModalIsOpen: false,
+    signatureKey: "form",
+    toggleSignatureModalIsOpen: (signatureKey) =>
+      set((state) => {
+        if (signatureKey) {
+          state.signatureKey = signatureKey;
+        }
+
+        state.signatureModalIsOpen = !state.signatureModalIsOpen;
+      }),
   }))
 );

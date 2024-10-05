@@ -24,6 +24,10 @@ h1 {
   border: 1px solid black;
 }
 
+.signature-image {
+  border-bottom: 1px solid black;
+}
+
 @media print {
   :root {
     font-size: 10pt;

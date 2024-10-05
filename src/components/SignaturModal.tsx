@@ -1,7 +1,5 @@
 import {
-
   Box,
-  Button,
   Modal,
 } from "@mui/material";
 import { useAppStore } from "../stores/appStore";
@@ -27,9 +25,6 @@ export function SignatureModal() {
 
         <SignaturePad />
 
-        <Button onClick={() => toggleSignatureModalIsOpen()} fullWidth>
-          Schließen
-        </Button>
       </Box>
     </Modal>
   );

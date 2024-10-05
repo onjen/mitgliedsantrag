@@ -7,9 +7,11 @@ import {
   CssBaseline,
   FormControl,
   FormControlLabel,
+  IconButton,
   PaletteColorOptions,
   Radio,
   RadioGroup,
+  Stack,
   TextField,
   ThemeProvider,
 } from "@mui/material";
@@ -23,14 +25,17 @@ import { useShallow } from "zustand/shallow";
 import { BankAccountList } from "./components/BankAccountList";
 import { HelpModal } from "./components/HelpModal";
 import { SignatureModal } from "./components/SignaturModal";
+import { Edit } from "@mui/icons-material";
 
 function App() {
-  const [togglePrintModalIsOpen, toggleSignatureModalIsOpen] = useAppStore(
-    useShallow((state) => [
-      state.togglePrintModalIsOpen,
-      state.toggleSignatureModalIsOpen
-    ])
-  );
+  const [togglePrintModalIsOpen, toggleSignatureModalIsOpen, signatures] =
+    useAppStore(
+      useShallow((state) => [
+        state.togglePrintModalIsOpen,
+        state.toggleSignatureModalIsOpen,
+        state.signatures,
+      ])
+    );
 
   const primary: PaletteColorOptions = {
     main: "#159989",
@@ -93,22 +98,55 @@ function App() {
               Verwendungszweck angeben müssen. Bitte richten Sie einen
               Dauerauftrag ein oder nutzen Sie das Formular für ein
               Lastschriftmandat.
-
             </p>
           </div>
 
-          <BankAccountList/>
+          <BankAccountList />
           <TextField
             id="standard-basic"
             label="Unterschrift"
             variant="standard"
             fullWidth
-            
-            
           />
-            <Button variant="contained" onClick={() => toggleSignatureModalIsOpen()}>
-              Signature
-            </Button>
+
+<Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 1, sm: 1, md: 1 }}
+            useFlexGap
+            sx={{
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <TextField
+              id="standard-basic"
+              label="Datum"
+              variant="standard"
+              defaultValue={new Date().toLocaleDateString()}
+            />
+            <TextField id="standard-basic" label="Ort" variant="standard" />
+
+            <img
+              width="100%"
+              height="100"
+              src={
+                signatures.find((signature) => signature.key === "sepa")
+                  ?.dataURL
+                  ? signatures.find((signature) => signature.key === "sepa")
+                      ?.dataURL
+                  : ""
+              }
+              alt="Unterschrift"
+              className="signature-image"
+            />
+
+            <IconButton
+              aria-label="Unterschreiben"
+              onClick={() => toggleSignatureModalIsOpen("form")}
+            >
+              <Edit />
+            </IconButton>
+          </Stack>
 
           <h2>Freiwillige angaben </h2>
           <ul>
@@ -196,16 +234,47 @@ function App() {
                 fullWidth
               />
             </li>
-            <li>
-              <TextField
-                id="standard-basic"
-                label="Unterschrift"
-                variant="standard"
-                fullWidth
-                disabled
-              />
-            </li>
           </ul>
+
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 1, sm: 1, md: 1 }}
+            useFlexGap
+            sx={{
+              justifyContent: "space-between",
+              alignItems: "baseline",
+            }}
+          >
+            <TextField
+              id="standard-basic"
+              label="Datum"
+              variant="standard"
+              defaultValue={new Date().toLocaleDateString()}
+            />
+            <TextField id="standard-basic" label="Ort" variant="standard" />
+
+            <img
+              width="100%"
+              height="100"
+              src={
+                signatures.find((signature) => signature.key === "sepa")
+                  ?.dataURL
+                  ? signatures.find((signature) => signature.key === "sepa")
+                      ?.dataURL
+                  : ""
+              }
+              alt="Unterschrift SEPA"
+              className="signature-image"
+            />
+
+            <IconButton
+              aria-label="Unterschreiben SEPA"
+              onClick={() => toggleSignatureModalIsOpen("sepa")}
+            >
+              <Edit />
+            </IconButton>
+          </Stack>
+
           <div>
             <p>
               abschicken an: <br></br>
@@ -223,7 +292,10 @@ function App() {
           </div>
 
           <div className="no-print">
-            <Button variant="contained" onClick={() => togglePrintModalIsOpen()}>
+            <Button
+              variant="contained"
+              onClick={() => togglePrintModalIsOpen()}
+            >
               Drucken
             </Button>
           </div>

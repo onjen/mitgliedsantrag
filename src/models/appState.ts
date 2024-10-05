@@ -16,6 +16,8 @@ export interface AppState {
 
   // SIGNATURES
   signatures: SignatureItem[];
+  updateSignatureItemDataURL: (dataURL: string) => void;
+  getSignatureItemDataURL: () => string;
 
   // MODALS
   printModalIsOpen: boolean;
