@@ -5,11 +5,12 @@ import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
 
 import { useResizeDetector } from "react-resize-detector";
+import { BLANK_PNG } from "../const";
 
 function SignaturePad() {
   const signatureCanvasRef = useRef<SignatureCanvas>(null);
   const signatureCanvasWrapperRef = useRef<HTMLDivElement>(null);
-  const { width, height } = useResizeDetector({
+  const { width } = useResizeDetector({
     targetRef: signatureCanvasWrapperRef,
   });
 
@@ -28,6 +29,8 @@ function SignaturePad() {
   const clearSignature = () => {
     if (signatureCanvasRef.current) {
       signatureCanvasRef.current?.clear();
+      signatureCanvasRef.current?.fromDataURL(BLANK_PNG);
+      
     }
   };
 
@@ -62,7 +65,6 @@ function SignaturePad() {
         />
       </div>
 
-      {`width:${width} height:${height}`}
       <Stack
         direction={{ xs: "column", sm: "row" }}
         spacing={{ xs: 1, sm: 1, md: 1 }}

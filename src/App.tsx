@@ -7,11 +7,9 @@ import {
   CssBaseline,
   FormControl,
   FormControlLabel,
-  IconButton,
   PaletteColorOptions,
   Radio,
   RadioGroup,
-  Stack,
   TextField,
   ThemeProvider,
 } from "@mui/material";
@@ -25,15 +23,16 @@ import { useShallow } from "zustand/shallow";
 import { BankAccountList } from "./components/BankAccountList";
 import { HelpModal } from "./components/HelpModal";
 import { SignatureModal } from "./components/SignaturModal";
-import { Edit } from "@mui/icons-material";
+import SignatureStack from "./components/SignatureStack";
+
 
 function App() {
-  const [togglePrintModalIsOpen, toggleSignatureModalIsOpen, signatures] =
+  const [togglePrintModalIsOpen, signatures, signatureKey] =
     useAppStore(
       useShallow((state) => [
         state.togglePrintModalIsOpen,
-        state.toggleSignatureModalIsOpen,
         state.signatures,
+        state.signatureKey
       ])
     );
 
@@ -55,8 +54,9 @@ function App() {
     palette: {
       primary: primary,
       secondary: secondary,
-    },
+    }
   });
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -102,51 +102,12 @@ function App() {
           </div>
 
           <BankAccountList />
-          <TextField
-            id="standard-basic"
-            label="Unterschrift"
-            variant="standard"
-            fullWidth
-          />
 
-<Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 1, md: 1 }}
-            useFlexGap
-            sx={{
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <TextField
-              id="standard-basic"
-              label="Datum"
-              variant="standard"
-              defaultValue={new Date().toLocaleDateString()}
-            />
-            <TextField id="standard-basic" label="Ort" variant="standard" />
+          <SignatureStack signatureKey="form" />
+        
+        {JSON.stringify(signatures)}
 
-            <img
-              width="100%"
-              height="100"
-              src={
-                signatures.find((signature) => signature.key === "sepa")
-                  ?.dataURL
-                  ? signatures.find((signature) => signature.key === "sepa")
-                      ?.dataURL
-                  : ""
-              }
-              alt="Unterschrift"
-              className="signature-image"
-            />
-
-            <IconButton
-              aria-label="Unterschreiben"
-              onClick={() => toggleSignatureModalIsOpen("form")}
-            >
-              <Edit />
-            </IconButton>
-          </Stack>
+        signatureKey: {signatureKey}
 
           <h2>Freiwillige angaben </h2>
           <ul>
@@ -236,44 +197,7 @@ function App() {
             </li>
           </ul>
 
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 1, md: 1 }}
-            useFlexGap
-            sx={{
-              justifyContent: "space-between",
-              alignItems: "baseline",
-            }}
-          >
-            <TextField
-              id="standard-basic"
-              label="Datum"
-              variant="standard"
-              defaultValue={new Date().toLocaleDateString()}
-            />
-            <TextField id="standard-basic" label="Ort" variant="standard" />
-
-            <img
-              width="100%"
-              height="100"
-              src={
-                signatures.find((signature) => signature.key === "sepa")
-                  ?.dataURL
-                  ? signatures.find((signature) => signature.key === "sepa")
-                      ?.dataURL
-                  : ""
-              }
-              alt="Unterschrift SEPA"
-              className="signature-image"
-            />
-
-            <IconButton
-              aria-label="Unterschreiben SEPA"
-              onClick={() => toggleSignatureModalIsOpen("sepa")}
-            >
-              <Edit />
-            </IconButton>
-          </Stack>
+          <SignatureStack signatureKey="sepa" />
 
           <div>
             <p>
