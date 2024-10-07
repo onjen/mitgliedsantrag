@@ -22,17 +22,14 @@ import { useAppStore } from "./stores/appStore";
 import { useShallow } from "zustand/shallow";
 import { BankAccountList } from "./components/BankAccountList";
 import { HelpModal } from "./components/HelpModal";
-import { SignatureModal } from "./components/SignaturModal";
 import SignatureStack from "./components/SignatureStack";
 
 
 function App() {
-  const [togglePrintModalIsOpen, signatures, signatureKey] =
+  const [togglePrintModalIsOpen] =
     useAppStore(
       useShallow((state) => [
-        state.togglePrintModalIsOpen,
-        state.signatures,
-        state.signatureKey
+        state.togglePrintModalIsOpen
       ])
     );
 
@@ -65,7 +62,6 @@ function App() {
         <AppBarWrapper />
         <PrintModal />
         <HelpModal />
-        <SignatureModal />
 
         <Box component="main" sx={{ p: 3 }}>
           <h1>Antrag auf Mitgliedschaft </h1>
@@ -105,10 +101,6 @@ function App() {
 
           <SignatureStack signatureKey="form" />
         
-        {JSON.stringify(signatures)}
-
-        signatureKey: {signatureKey}
-
           <h2>Freiwillige angaben </h2>
           <ul>
             <li>

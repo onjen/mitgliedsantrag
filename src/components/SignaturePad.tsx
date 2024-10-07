@@ -6,8 +6,14 @@ import { useShallow } from "zustand/shallow";
 
 import { useResizeDetector } from "react-resize-detector";
 import { BLANK_PNG } from "../const";
+import { AllowedSignatureKeys } from "../models/AllowedSignatureKeys";
 
-function SignaturePad() {
+interface SignaturePadProps {
+  signatureKey: AllowedSignatureKeys;
+  onClose: () => void;
+}
+function SignaturePad(props: Readonly<SignaturePadProps>) {
+
   const signatureCanvasRef = useRef<SignatureCanvas>(null);
   const signatureCanvasWrapperRef = useRef<HTMLDivElement>(null);
   const { width } = useResizeDetector({
@@ -16,12 +22,10 @@ function SignaturePad() {
 
   const [
     updateSignatureItemDataURL,
-    toggleSignatureModalIsOpen,
     getSignatureItemDataURL,
   ] = useAppStore(
     useShallow((state) => [
       state.updateSignatureItemDataURL,
-      state.toggleSignatureModalIsOpen,
       state.getSignatureItemDataURL,
     ])
   );
@@ -30,15 +34,14 @@ function SignaturePad() {
     if (signatureCanvasRef.current) {
       signatureCanvasRef.current?.clear();
       signatureCanvasRef.current?.fromDataURL(BLANK_PNG);
-      
     }
   };
 
   const saveSignature = () => {
     if (signatureCanvasRef.current) {
       const signatureImage = signatureCanvasRef.current?.toDataURL();
-      updateSignatureItemDataURL(signatureImage);
-      toggleSignatureModalIsOpen();
+      updateSignatureItemDataURL(props.signatureKey, signatureImage);
+      props.onClose();
     }
   };
 
@@ -46,9 +49,9 @@ function SignaturePad() {
     if (width && signatureCanvasRef.current) {
       const x = signatureCanvasRef.current?.getCanvas();
       x.width = width;
-      signatureCanvasRef.current.fromDataURL(getSignatureItemDataURL());
+      signatureCanvasRef.current.fromDataURL(getSignatureItemDataURL(props.signatureKey));
     }
-  }, [width, signatureCanvasRef, getSignatureItemDataURL]);
+  }, [width, signatureCanvasRef, getSignatureItemDataURL, props.signatureKey]);
 
   return (
     <div>
@@ -76,7 +79,7 @@ function SignaturePad() {
       >
         <Button
           variant="outlined"
-          onClick={() => toggleSignatureModalIsOpen()}
+          onClick={() => props.onClose()}
           sx={{ width: { xs: "100%", md: "auto" } }}
         >
           schließen

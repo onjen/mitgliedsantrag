@@ -16,8 +16,8 @@ export interface AppState {
 
   // SIGNATURES
   signatures: SignatureItem[];
-  updateSignatureItemDataURL: (dataURL: string) => void;
-  getSignatureItemDataURL: () => string;
+  updateSignatureItemDataURL: (key: AllowedSignatureKeys, dataURL: string) => void;
+  getSignatureItemDataURL: (key: AllowedSignatureKeys) => string;
 
   // MODALS
   printModalIsOpen: boolean;
@@ -26,7 +26,5 @@ export interface AppState {
   helpModalIsOpen: boolean;
   toggleHelpModalIsOpen: () => void;
 
-  signatureModalIsOpen: boolean;
-  signatureKey: AllowedSignatureKeys;
-  toggleSignatureModalIsOpen: (signatureKey?: AllowedSignatureKeys) => void;
+  
 }

@@ -20,7 +20,7 @@ export const useAppStore = create<AppState>()(
         const index = state.formItems.findIndex(
           (formItem) => formItem.key === key
         );
-        if (index !== -1) {
+        if (index > -1) {
           state.formItems[index].value = value;
         }
       });
@@ -30,30 +30,32 @@ export const useAppStore = create<AppState>()(
         const index = state.formItems.findIndex(
           (formItem) => formItem.key === key
         );
-        if (index !== -1) {
+        if (index > -1) {
           state.formItems[index].required = !state.formItems[index].required;
         }
       });
     },
     signatures: getInitialSignatureItems(["form", "sepa"]),
-    updateSignatureItemDataURL: (dataURL) => {
+    updateSignatureItemDataURL: (key, dataURL) => {
       set((state) => {
         const index = state.signatures.findIndex(
-          (signature) => signature.key === state.signatureKey
+          (signature) => signature.key === key
         );
-        if (index !== -1) {
+        if (index > -1) {
           state.signatures[index].dataURL = dataURL;
         }
       });
     },
-    getSignatureItemDataURL: () => {
+    getSignatureItemDataURL: (key) => {
       const index = get().signatures.findIndex(
-        (signature) => signature.key === get().signatureKey
+        (signature) => signature.key === key
       );
-      if (index !== -1) {
+      console.log("getsignatureItemDataUrl: key, index", key, index);
+      if (index > -1) {
         return get().signatures[index].dataURL;
       }
 
+      console.log("getsignatureItemDataUrl: RETURN EMPTY");
       return "";
     },
     printModalIsOpen: false,
@@ -65,16 +67,6 @@ export const useAppStore = create<AppState>()(
     toggleHelpModalIsOpen: () =>
       set((state) => {
         state.helpModalIsOpen = !state.helpModalIsOpen;
-      }),
-    signatureModalIsOpen: false,
-    signatureKey: "form",
-    toggleSignatureModalIsOpen: (signatureKey) =>
-      set((state) => {
-        if (signatureKey) {
-          state.signatureKey = signatureKey;
-        }
-
-        state.signatureModalIsOpen = !state.signatureModalIsOpen;
-      }),
+      })
   }))
 );
