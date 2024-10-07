@@ -1,15 +1,17 @@
+import { ADDRESS_ARRAY, MAIL_ADDRESS } from "../const";
+
 function AddressArea() {
   return (
     <div>
+      <p>Vollständig ausgefüllt abschicken an:</p>
+      <ul>
+        {ADDRESS_ARRAY.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
       <p>
-        Vollständig ausgefüllt abschicken an: <br/>
-        Erfindergeist Jülich e.V. <br/>
-        Buchenweg 16 <br/>
-        52399 Merzenich <br/>
-        <br/>
-        oder <br/>
-        Via E-Mail an: <br/> <a href="mailto:vorstand@erfindergeist.org">vorstand@erfindergeist.org</a>
-        
+        oder E-Mail an: <br />
+        <a href={`mailto:${MAIL_ADDRESS}`}>{MAIL_ADDRESS}</a>
       </p>
     </div>
   );

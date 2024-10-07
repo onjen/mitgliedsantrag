@@ -1,16 +1,14 @@
 import {
-  Accordion,
-  AccordionActions,
-  AccordionDetails,
-  AccordionSummary,
   Box,
   Button,
   Modal,
+  Stack,
 } from "@mui/material";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
-import { ExpandMore, Print } from "@mui/icons-material";
+import { Print } from "@mui/icons-material";
 import { modalBoxStyle } from "../styles/styles";
+import { PRINT_SETTINGS_TEXT } from "../const";
 
 export function PrintModal() {
   const [printModalIsOpen, togglePrintModalIsOpen] = useAppStore(
@@ -35,41 +33,32 @@ export function PrintModal() {
     >
       <Box sx={modalBoxStyle}>
         <h2>Drucken</h2>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            Druck Hilfe
-          </AccordionSummary>
-          <AccordionDetails>
-            Wir nutzen die Standard Druck-Funktion Ihres Browsers. Diese weiche
-            je nach Drucker ab. Daher müssen Sie selber ein paar einstellungen
-            vornehmen. Prüfen Sie bitte ob die Druckvorschau alles richtig
-            anzeigt. Deaktivieren Sie gegebenenfalls unter "Weiteren
-            Einstellungen" die "Kopf- und Fusszeilen"
-          </AccordionDetails>
-        </Accordion>
-        <Accordion defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel3-content"
-            id="panel3-header"
-          >
-            Drucken
-          </AccordionSummary>
-          <AccordionDetails>
-            Wir überlassen es Ihnen das Formular im Browser auszufüllen, es per
-            Hand auszufüllen oder gemischt ausfüllen.
-          </AccordionDetails>
-          <AccordionActions>
-            <Button onClick={() => togglePrintModalIsOpen()}>Abbrechen</Button>
-            <Button variant="contained" onClick={() => handlePrint()} endIcon={<Print />}>
-              Drucken
-            </Button>
-          </AccordionActions>
-        </Accordion>
+
+            {PRINT_SETTINGS_TEXT}
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 1, sm: 1, md: 1 }}
+              useFlexGap
+              sx={{
+                padding: "8px",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Button onClick={() => togglePrintModalIsOpen()} fullWidth>
+                Abbrechen
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => handlePrint()}
+                endIcon={<Print />}
+                fullWidth
+              >
+                Drucken
+              </Button>
+            </Stack>
+
+
       </Box>
     </Modal>
   );

@@ -10,6 +10,7 @@ import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
 import { ExpandMore } from "@mui/icons-material";
 import { modalBoxStyle } from "../styles/styles";
+import { ADDRESS_ARRAY, MAIL_ADDRESS, PRINT_SETTINGS_TEXT } from "../const";
 
 export function HelpModal() {
   const [helpModalIsOpen, toggleHelpModalIsOpen] = useAppStore(
@@ -34,13 +35,7 @@ export function HelpModal() {
           >
             Druck Hilfe
           </AccordionSummary>
-          <AccordionDetails>
-            Wir nutzen die Standard Druck-Funktion Ihres Browsers. Diese weiche
-            je nach Drucker ab. Daher müssen Sie selber ein paar einstellungen
-            vornehmen. Prüfen Sie bitte ob die Druckvorschau alles richtig
-            anzeigt. Deaktivieren Sie gegebenenfalls unter "Weiteren
-            Einstellungen" die "Kopf- und Fusszeilen"
-          </AccordionDetails>
+          <AccordionDetails>{PRINT_SETTINGS_TEXT}</AccordionDetails>
         </Accordion>
         <Accordion>
           <AccordionSummary
@@ -48,15 +43,14 @@ export function HelpModal() {
             aria-controls="panel2-content"
             id="panel2-header"
           >
-            senden via E-Mail
+            Senden via E-Mail
           </AccordionSummary>
           <AccordionDetails>
             Vollständig ausgefüllte Anträge können Sie auch als PDF Drucken und
-            uns direkt senden. Sie können auch von Hand den Antrag ausfüllen, im
-            anschluss Scannen und uns via E-Mail senden. E-Mail:{" "}
-            <a href="mailto:vorstand@erfindergeist.org">
-              vorstand@erfindergeist.org
-            </a>
+            uns direkt senden. Sie können den Antrag auch Drucken und von Hand
+            ausfüllen, im anschluss Scannen und uns via E-Mail senden, an:{" "}
+            <br />
+            <a href={`mailto:${MAIL_ADDRESS}`}>{MAIL_ADDRESS}</a>
           </AccordionDetails>
         </Accordion>
         <Accordion>
@@ -65,10 +59,16 @@ export function HelpModal() {
             aria-controls="panel2-content"
             id="panel2-header"
           >
-            senden via Post
+            Senden via Post
           </AccordionSummary>
           <AccordionDetails>
-            Vollständig ausgefüllte Anträge können Sie an: xxx senden.
+            Vollständig ausgefüllte Anträge an folgende Adresse
+            senden:
+            <ul>
+              {ADDRESS_ARRAY.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
           </AccordionDetails>
         </Accordion>
 
