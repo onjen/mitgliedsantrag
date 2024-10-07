@@ -5,12 +5,7 @@ import {
   Button,
   createTheme,
   CssBaseline,
-  FormControl,
-  FormControlLabel,
   PaletteColorOptions,
-  Radio,
-  RadioGroup,
-  TextField,
   ThemeProvider,
 } from "@mui/material";
 
@@ -23,6 +18,8 @@ import { useShallow } from "zustand/shallow";
 import { BankAccountList } from "./components/BankAccountList";
 import { HelpModal } from "./components/HelpModal";
 import SignatureStack from "./components/SignatureStack";
+import VolunteerArea from "./components/VolunteerArea";
+import SepaArea from "./components/SepaArea";
 
 
 function App() {
@@ -101,95 +98,9 @@ function App() {
 
           <SignatureStack signatureKey="form" />
         
-          <h2>Freiwillige angaben </h2>
-          <ul>
-            <li>
-              <TextField
-                id="standard-basic"
-                label="Beruf/Tätigkeitsort"
-                variant="standard"
-                fullWidth
-              />
-            </li>
-            <li>
-              <TextField
-                id="standard-basic"
-                label="Warum möchten Sie Mitglied bei uns werden?"
-                variant="outlined"
-                minRows={3}
-                multiline
-                fullWidth
-              />
-            </li>
-          </ul>
-          <div>
-            <p>
-              Möchten sie aktiv bei der Vereinsplanung und Struktur mitwirken?
-            </p>
-          </div>
-          <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
-              row
-            >
-              <FormControlLabel value="Ja" control={<Radio />} label="Ja" />
-              <FormControlLabel
-                value="Vielleicht"
-                control={<Radio />}
-                label="Vielleicht"
-              />
-              <FormControlLabel value="Nein" control={<Radio />} label="Nein" />
-            </RadioGroup>
-          </FormControl>
+          <VolunteerArea />
 
-          <h1>SEPA-Lastschriftmandat</h1>
-          <div>
-            <p>
-              Gläubiger-Identifikationsnummer: DE27ZZZ00002425162 Hier mit
-              ermächtige ich, dass der Erfindergeist Jülich mittels Lastschrift
-              die im Antrag angekreuzte Zahlung einziehen darf. Zugleich weise
-              ich mein Kreditinstitut an, die vom Erfindergeist Jülich e.V. auf
-              mein Konto gezogene Lastschrift einzulösen.
-            </p>
-          </div>
-          <ul>
-            <li>
-              <TextField
-                id="standard-basic"
-                label="Kontoinhaber"
-                variant="standard"
-                fullWidth
-              />
-            </li>
-            <li>
-              <TextField
-                id="standard-basic"
-                label="Kreditinstitut"
-                variant="standard"
-                fullWidth
-              />
-            </li>
-            <li>
-              <TextField
-                id="standard-basic"
-                label="IBAN"
-                variant="standard"
-                fullWidth
-              />
-            </li>
-            <li>
-              <TextField
-                id="standard-basic"
-                label="BIC"
-                variant="standard"
-                fullWidth
-              />
-            </li>
-          </ul>
-
-          <SignatureStack signatureKey="sepa" />
+          <SepaArea />
 
           <div>
             <p>

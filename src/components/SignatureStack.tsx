@@ -1,5 +1,9 @@
-import { Edit } from "@mui/icons-material";
-import { IconButton, Stack, TextField } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  Input,
+  Stack,
+} from "@mui/material";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
 import { AllowedSignatureKeys } from "../models/AllowedSignatureKeys";
@@ -14,13 +18,14 @@ interface SignatureStackProps {
 function SignatureStack(props: Readonly<SignatureStackProps>) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const [signatures, updateSignatureItemDate, updateSignatureItemLocation] = useAppStore(
-    useShallow((state) => [
-      state.signatures,
-      state.updateSignatureItemDate,
-      state.updateSignatureItemLocation,
-    ])
-  );
+  const [signatures, updateSignatureItemDate, updateSignatureItemLocation] =
+    useAppStore(
+      useShallow((state) => [
+        state.signatures,
+        state.updateSignatureItemDate,
+        state.updateSignatureItemLocation,
+      ])
+    );
 
   return (
     <>
@@ -38,56 +43,74 @@ function SignatureStack(props: Readonly<SignatureStackProps>) {
           alignItems: "center",
         }}
       >
-        <TextField
-          id="standard-basic"
-          label="Datum"
+        <FormControl variant="standard" fullWidth>
+          <Input
+            aria-describedby="standard-weight-helper-text"
+            onChange={(event) =>
+              updateSignatureItemDate(props.signatureKey, event.target.value)
+            }
+            value={
+              signatures.find(
+                (signature) => signature.key === props.signatureKey
+              )?.date
+            }
+          />
+          <FormHelperText id="standard-weight-helper-text">
+            Datum
+          </FormHelperText>
+        </FormControl>
+
+        <FormControl variant="standard" fullWidth>
+          <Input
+            aria-describedby="standard-weight-helper-text"
+            onChange={(event) =>
+              updateSignatureItemLocation(
+                props.signatureKey,
+                event.target.value
+              )
+            }
+            value={
+              signatures.find(
+                (signature) => signature.key === props.signatureKey
+              )?.location
+            }
+          />
+          <FormHelperText id="standard-weight-helper-text">Ort</FormHelperText>
+        </FormControl>
+
+        <FormControl
           variant="standard"
-          onChange={(event) =>
-            updateSignatureItemDate(props.signatureKey, event.target.value)
-          }
-          value={  signatures.find(
-            (signature) => signature.key === props.signatureKey
-          )?.date}
-          sx={{ width: { xs: "100%", md: "auto" } }}
-        />
-
-        <TextField
-          label="Ort"
-          variant="standard"
-          sx={{ width: { xs: "100%", md: "auto" } }}
-          onChange={(event) => updateSignatureItemLocation(props.signatureKey, event.target.value)}
-          value={  signatures.find(
-            (signature) => signature.key === props.signatureKey
-          )?.location}
-        />
-
-
-        <TextField
           onClick={() => setModalIsOpen(true)}
-          inputProps={{ readOnly: true }}
-          value={
-            signatures.find(
-              (signature) => signature.key === props.signatureKey
-            )?.dataURL === BLANK_PNG ? "" : " "
-          }
-          label="Unterschrift"
-          variant="standard"
-          sx={{
-            width: { xs: "100%", md: "100%" },
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 100%",
-            backgroundImage: `url("${  signatures.find(
-              (signature) => signature.key === props.signatureKey
-            )?.dataURL}")`,
-          }}
-        />
-
-        <IconButton
-          aria-label="Unterschreiben"
-          onClick={() => setModalIsOpen(true)}
+          fullWidth
         >
-          <Edit />
-        </IconButton>
+          <Input
+            id="input-with-icon-adornment"
+            value={
+              signatures.find(
+                (signature) => signature.key === props.signatureKey
+              )?.dataURL === BLANK_PNG
+                ? ""
+                : " "
+            }
+            readOnly
+          />
+          <img
+            width="100%"
+            height="80%"
+            style={{
+              position: "absolute",
+            }}
+            src={
+              signatures.find(
+                (signature) => signature.key === props.signatureKey
+              )?.dataURL
+            }
+          />
+
+          <FormHelperText id="standard-weight-helper-text">
+            Unterschrift
+          </FormHelperText>
+        </FormControl>
       </Stack>
     </>
   );

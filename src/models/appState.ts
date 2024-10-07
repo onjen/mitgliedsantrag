@@ -8,6 +8,9 @@ export interface AppState {
   contributeValue: string;
   setContributeValue: (value: string) => void;
 
+  contributeFundingAmount: string;
+  setContributeFundingAmount: (amount: string) => void;
+
   // FORM
   formItems: FormItem[];
   setFormItems: (formItems: FormItem[]) => void;

@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import RadioWrapper from "./RadioWrapper";
-import { TextField } from "@mui/material";
+import { FormControl, FormHelperText, Input } from "@mui/material";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
 function createData(key: string, name: string, month: number) {
@@ -22,9 +22,14 @@ const rows = [
 ];
 
 export default function ContributeTable() {
-  const [contributeValue, setContributeValue] = useAppStore(
-    useShallow((state) => [state.contributeValue, state.setContributeValue]),
-  )
+  const [contributeValue, setContributeValue, contributeFundingAmount,setContributeFundingAmount] = useAppStore(
+    useShallow((state) => [
+      state.contributeValue,
+      state.setContributeValue,
+      state.contributeFundingAmount,
+      state.setContributeFundingAmount
+    ])
+  );
 
   const handleRadioChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -59,12 +64,18 @@ export default function ContributeTable() {
                     <br />
                     Ich fördere den Erfindergeist Jülich e.V. mit folgendem
                     Betrag (in Euro, pro Monat):
-                    <TextField
-                      id="standard-basic"
-                      label="Monats Beitrag"
-                      variant="standard"
-                      fullWidth
-                    />
+                    <FormControl variant="standard" fullWidth>
+                      <Input
+                        aria-describedby="standard-weight-helper-text"
+                        onChange={(event) => {
+                          setContributeFundingAmount(event.target.value);
+                        }}
+                        value={contributeFundingAmount}
+                      />
+                      <FormHelperText id="standard-weight-helper-text">
+                        Monats Beitrag
+                      </FormHelperText>
+                    </FormControl>
                     Dieser Betrag wird gesammelt, einmal jährlich überwiesen
                     oder abgebucht. Juristische Personen geben bitte den Namen
                     einer natürlichen Person als Vertreter an

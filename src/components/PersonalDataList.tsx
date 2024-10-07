@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { FormControl, FormHelperText, Input } from "@mui/material";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
 
@@ -12,21 +12,23 @@ export function PersonalDataList() {
       {formItems.map((formItem) => {
         return (
           <li key={formItem.key}>
-            <TextField
-              id="standard-basic"
-              label={formItem.key}
-              variant="standard"
-              fullWidth
-              value={
-                formItems.find(
-                  (formItemFind) => formItemFind.key === formItem.key
-                )?.value
-              }
-              onChange={(event) => {
-                updateFormItemValue(formItem.key, event.target.value);
-              }}
-              required={formItem.required}
-            />
+            <FormControl variant="standard" fullWidth>
+              <Input
+                aria-describedby="standard-weight-helper-text"
+                onChange={(event) => {
+                  updateFormItemValue(formItem.key, event.target.value);
+                }}
+                value={
+                  formItems.find(
+                    (formItemFind) => formItemFind.key === formItem.key
+                  )?.value
+                }
+                multiline
+              />
+              <FormHelperText id="standard-weight-helper-text" required={formItem.required}>
+                {formItem.key}
+              </FormHelperText>
+            </FormControl>
           </li>
         );
       })}

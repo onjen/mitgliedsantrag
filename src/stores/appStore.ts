@@ -10,6 +10,8 @@ export const useAppStore = create<AppState>()(
   immer((set) => ({
     contributeValue: "noting",
     setContributeValue: (value) => set({ contributeValue: value }),
+    contributeFundingAmount: "",
+    setContributeFundingAmount: (amount) => set({ contributeFundingAmount: amount }),
     formItems: getInitialFormItems(
       allowedFormKeys as unknown as AllowedFormKeys[],
       requiredFormKeys
