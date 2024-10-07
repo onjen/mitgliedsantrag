@@ -110,6 +110,7 @@ function App() {
             <Button
               variant="contained"
               onClick={() => togglePrintModalIsOpen()}
+              fullWidth
             >
               Drucken
             </Button>
