@@ -7,7 +7,7 @@ import { allowedFormKeys, requiredFormKeys } from "../const";
 import { AllowedFormKeys } from "../models/AllowedFormKeys";
 
 export const useAppStore = create<AppState>()(
-  immer((set, get) => ({
+  immer((set) => ({
     contributeValue: "noting",
     setContributeValue: (value) => set({ contributeValue: value }),
     formItems: getInitialFormItems(
@@ -46,17 +46,25 @@ export const useAppStore = create<AppState>()(
         }
       });
     },
-    getSignatureItemDataURL: (key) => {
-      const index = get().signatures.findIndex(
-        (signature) => signature.key === key
-      );
-      console.log("getsignatureItemDataUrl: key, index", key, index);
-      if (index > -1) {
-        return get().signatures[index].dataURL;
-      }
-
-      console.log("getsignatureItemDataUrl: RETURN EMPTY");
-      return "";
+    updateSignatureItemDate: (key, date) => {
+      set((state) => {
+        const index = state.signatures.findIndex(
+          (signature) => signature.key === key
+        );
+        if (index > -1) {
+          state.signatures[index].date = date;
+        }
+      });
+    },
+    updateSignatureItemLocation: (key, location) => {
+      set((state) => {
+        const index = state.signatures.findIndex(
+          (signature) => signature.key === key
+        );
+        if (index > -1) {
+          state.signatures[index].location = location;
+        }
+      });
     },
     printModalIsOpen: false,
     togglePrintModalIsOpen: () =>

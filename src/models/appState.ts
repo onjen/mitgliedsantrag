@@ -14,10 +14,11 @@ export interface AppState {
   updateFormItemValue: (key: AllowedFormKeys, value: string) => void;
   toggleFormItemRequired: (key: AllowedFormKeys) => void;
 
-  // SIGNATURES
+  // SIGNATURES Forms
   signatures: SignatureItem[];
   updateSignatureItemDataURL: (key: AllowedSignatureKeys, dataURL: string) => void;
-  getSignatureItemDataURL: (key: AllowedSignatureKeys) => string;
+  updateSignatureItemDate: (key: AllowedSignatureKeys, date: string) => void;
+  updateSignatureItemLocation: (key: AllowedSignatureKeys, location: string) => void;
 
   // MODALS
   printModalIsOpen: boolean;

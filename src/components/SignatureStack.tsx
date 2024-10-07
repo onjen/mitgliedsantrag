@@ -12,22 +12,22 @@ interface SignatureStackProps {
 }
 
 function SignatureStack(props: Readonly<SignatureStackProps>) {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const [getSignatureItemDataURL] =
-    useAppStore(
-      useShallow((state) => [
-        state.getSignatureItemDataURL,
-      ])
-    );
+  const [signatures, updateSignatureItemDate, updateSignatureItemLocation] = useAppStore(
+    useShallow((state) => [
+      state.signatures,
+      state.updateSignatureItemDate,
+      state.updateSignatureItemLocation,
+    ])
+  );
 
   return (
     <>
-      <SignatureModal 
+      <SignatureModal
         signatureKey={props.signatureKey}
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
-
       />
       <Stack
         direction={{ xs: "column", sm: "row" }}
@@ -42,7 +42,12 @@ function SignatureStack(props: Readonly<SignatureStackProps>) {
           id="standard-basic"
           label="Datum"
           variant="standard"
-          defaultValue={new Date().toLocaleDateString()}
+          onChange={(event) =>
+            updateSignatureItemDate(props.signatureKey, event.target.value)
+          }
+          value={  signatures.find(
+            (signature) => signature.key === props.signatureKey
+          )?.date}
           sx={{ width: { xs: "100%", md: "auto" } }}
         />
 
@@ -50,13 +55,20 @@ function SignatureStack(props: Readonly<SignatureStackProps>) {
           label="Ort"
           variant="standard"
           sx={{ width: { xs: "100%", md: "auto" } }}
+          onChange={(event) => updateSignatureItemLocation(props.signatureKey, event.target.value)}
+          value={  signatures.find(
+            (signature) => signature.key === props.signatureKey
+          )?.location}
         />
+
 
         <TextField
           onClick={() => setModalIsOpen(true)}
           inputProps={{ readOnly: true }}
           value={
-            getSignatureItemDataURL(props.signatureKey) === BLANK_PNG ? "" : " "
+            signatures.find(
+              (signature) => signature.key === props.signatureKey
+            )?.dataURL === BLANK_PNG ? "" : " "
           }
           label="Unterschrift"
           variant="standard"
@@ -64,9 +76,9 @@ function SignatureStack(props: Readonly<SignatureStackProps>) {
             width: { xs: "100%", md: "100%" },
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% 100%",
-            backgroundImage: `url("${getSignatureItemDataURL(
-              props.signatureKey
-            )}")`,
+            backgroundImage: `url("${  signatures.find(
+              (signature) => signature.key === props.signatureKey
+            )?.dataURL}")`,
           }}
         />
 

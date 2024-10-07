@@ -21,12 +21,12 @@ function SignaturePad(props: Readonly<SignaturePadProps>) {
   });
 
   const [
+    signatures,
     updateSignatureItemDataURL,
-    getSignatureItemDataURL,
   ] = useAppStore(
     useShallow((state) => [
+      state.signatures,
       state.updateSignatureItemDataURL,
-      state.getSignatureItemDataURL,
     ])
   );
 
@@ -49,9 +49,11 @@ function SignaturePad(props: Readonly<SignaturePadProps>) {
     if (width && signatureCanvasRef.current) {
       const x = signatureCanvasRef.current?.getCanvas();
       x.width = width;
-      signatureCanvasRef.current.fromDataURL(getSignatureItemDataURL(props.signatureKey));
+      signatureCanvasRef.current.fromDataURL(  signatures.find(
+        (signature) => signature.key === props.signatureKey
+      )?.dataURL || BLANK_PNG);
     }
-  }, [width, signatureCanvasRef, getSignatureItemDataURL, props.signatureKey]);
+  }, [width, signatureCanvasRef, signatures, props.signatureKey]);
 
   return (
     <div>
