@@ -20,6 +20,7 @@ import { HelpModal } from "./components/HelpModal";
 import SignatureStack from "./components/SignatureStack";
 import VolunteerArea from "./components/VolunteerArea";
 import SepaArea from "./components/SepaArea";
+import AddressArea from "./components/AddressArea";
 
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
         <PrintModal />
         <HelpModal />
 
-        <Box component="main" sx={{ p: 3 }}>
+        <Box component="main">
           <h1>Antrag auf Mitgliedschaft </h1>
 
           <div>
@@ -99,24 +100,11 @@ function App() {
           <SignatureStack signatureKey="form" />
         
           <VolunteerArea />
+          <AddressArea />
 
+          {/* NEW SITE */}
           <SepaArea />
-
-          <div>
-            <p>
-              abschicken an: <br></br>
-              Erfindergeist Jülich e.V. <br></br>
-              Buchenweg 16 <br></br>
-              52399 Merzenich <br></br>
-              <br></br>
-              oder <br></br>
-              Persönlich bei uns in der{" "}
-              <a href="https://werkstatt.erfindergeist.org" target="_blank">
-                Werkstatt
-              </a>{" "}
-              abgeben.
-            </p>
-          </div>
+          <AddressArea />
 
           <div className="no-print">
             <Button

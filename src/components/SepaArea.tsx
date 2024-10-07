@@ -7,8 +7,8 @@ function SepaArea() {
       <h1>SEPA-Lastschriftmandat</h1>
       <div>
         <p>
-          Gläubiger-Identifikationsnummer: DE27ZZZ00002425162 Hier mit
-          ermächtige ich, dass der Erfindergeist Jülich mittels Lastschrift die
+          Unsere Gläubiger-Identifikationsnummer: DE27ZZZ00002425162<br/>
+          Hier mit ermächtige ich, dass der Erfindergeist Jülich mittels Lastschrift die
           im Antrag angekreuzte Zahlung einziehen darf. Zugleich weise ich mein
           Kreditinstitut an, die vom Erfindergeist Jülich e.V. auf mein Konto
           gezogene Lastschrift einzulösen.
