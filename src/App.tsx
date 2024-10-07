@@ -62,6 +62,10 @@ function App() {
         <HelpModal />
 
         <Box component="main">
+          <div className="no-print" style={{height: "30px"}}>
+            {/* simples spacer div */}
+
+          </div>
           <h1>Antrag auf Mitgliedschaft </h1>
 
           <div>
