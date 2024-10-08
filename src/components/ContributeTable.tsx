@@ -7,9 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import RadioWrapper from "./RadioWrapper";
-import { FormControl, FormHelperText, Input } from "@mui/material";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
+import ContributeIndividuallyBlock from "./ContributeIndividuallyBlock";
 function createData(key: string, name: string, month: number) {
   return { key, name, month };
 }
@@ -21,7 +21,11 @@ const rows = [
   createData("d", "- Individuelle Förderung:", 0),
 ];
 
-export default function ContributeTable() {
+interface ContributeTableProps {
+  className: string; 
+}
+
+export default function ContributeTable(props: Readonly<ContributeTableProps>) {
   const [contributeValue, setContributeValue, contributeFundingAmount,setContributeFundingAmount] = useAppStore(
     useShallow((state) => [
       state.contributeValue,
@@ -41,7 +45,7 @@ export default function ContributeTable() {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={props.className}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -60,26 +64,11 @@ export default function ContributeTable() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell colSpan={3} component="th" scope="row">
-                    {row.name}
-                    <br />
-                    Ich fördere den Erfindergeist Jülich e.V. mit folgendem
-                    Betrag (in Euro, pro Monat):
-                    <FormControl variant="standard" fullWidth>
-                      <Input
-                        aria-describedby="standard-weight-helper-text"
-                        onChange={(event) => {
-                          setContributeFundingAmount(event.target.value);
-                        }}
-                        value={contributeFundingAmount}
-                      />
-                      <FormHelperText id="standard-weight-helper-text">
-                        Monats Beitrag
-                      </FormHelperText>
-                    </FormControl>
-                    Dieser Betrag wird gesammelt, einmal jährlich überwiesen
-                    oder abgebucht. Juristische Personen geben bitte den Namen
-                    einer natürlichen Person als Vertreter an
-                    (Unternehmensname).
+                    <ContributeIndividuallyBlock 
+                      name={row.name}
+                      contributeFundingAmount={contributeFundingAmount}
+                      setContributeFundingAmount={setContributeFundingAmount}
+                    />
                   </TableCell>
                   <TableCell align="right">
                     <RadioWrapper

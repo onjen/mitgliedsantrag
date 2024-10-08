@@ -49,6 +49,14 @@ h1, h2 {
   page-break-before: avoid;
 }
 
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
 @media print {
   :root {
     font-size: 12pt;
@@ -69,5 +77,9 @@ h1, h2 {
 
   .only-Print {
     display: block;
-  }  
+  }
+  
+  .visible-on-print {
+    display: block;
+  }
 }

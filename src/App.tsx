@@ -7,6 +7,7 @@ import {
   CssBaseline,
   PaletteColorOptions,
   ThemeProvider,
+  useMediaQuery,
 } from "@mui/material";
 
 import ContributeTable from "./components/ContributeTable";
@@ -22,9 +23,12 @@ import VolunteerArea from "./components/VolunteerArea";
 import SepaArea from "./components/SepaArea";
 import AddressArea from "./components/AddressArea";
 import { Print } from "@mui/icons-material";
+import ContributeMobile from "./components/ContributeMobile";
 
 
 function App() {
+  const matches = useMediaQuery('(min-width:800px)');
+  
   const [togglePrintModalIsOpen] =
     useAppStore(
       useShallow((state) => [
@@ -79,7 +83,8 @@ function App() {
             </p>
           </div>
 
-          <ContributeTable />
+          <ContributeTable className={`${matches ? "visible" : "hidden"} visible-on-print`} />
+          <ContributeMobile className={`${!matches ? "visible" : "hidden"} no-print`}/>
 
           <PersonalDataList />
 
