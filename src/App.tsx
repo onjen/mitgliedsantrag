@@ -21,6 +21,7 @@ import SignatureStack from "./components/SignatureStack";
 import VolunteerArea from "./components/VolunteerArea";
 import SepaArea from "./components/SepaArea";
 import AddressArea from "./components/AddressArea";
+import { Print } from "@mui/icons-material";
 
 
 function App() {
@@ -116,6 +117,7 @@ function App() {
             <Button
               variant="contained"
               onClick={() => togglePrintModalIsOpen()}
+              endIcon={<Print />}
               fullWidth
             >
               Drucken
