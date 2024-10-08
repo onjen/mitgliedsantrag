@@ -46,9 +46,9 @@ export function HelpModal() {
             Senden via E-Mail
           </AccordionSummary>
           <AccordionDetails>
-            Vollständig ausgefüllte Anträge können Sie auch als PDF Drucken und
-            uns direkt senden. Sie können den Antrag auch Drucken und von Hand
-            ausfüllen, im anschluss Scannen und uns via E-Mail senden, an:{" "}
+            Vollständig ausgefüllte Anträge können Sie als PDF drucken und
+            uns direkt senden. Sie können den Antrag auch ausdrucken und von Hand
+            ausfüllen, im Anschluss einscannen und uns via E-Mail senden, an:{" "}
             <br />
             <a href={`mailto:${MAIL_ADDRESS}`}>{MAIL_ADDRESS}</a>
           </AccordionDetails>
