@@ -72,10 +72,9 @@ function App() {
             <p>
               Hier mit beantrage ich die Mitgliedschaft im Erfindergeist Jülich
               e.V. zum nächstmöglichen Zeitpunkt. Ich habe die Vereinssatzung
-              gelesen und bin mit der Einhaltung derer einverstanden. Mir ist
-              bewusst, dass mit der Annahme des Antrages eine Einladung zu den
-              Kommunikation- & Co-Working-Apps erfolgen und die Bildrechte
-              abgegeben werden.
+              gelesen und bin mit deren Einhaltung einverstanden. Mir ist
+              bewusst, dass mit der Annahme des Antrages eine Einladung zu den vereinsinternen
+              Kommunikations- & Co-Working-Apps erfolgt.
             </p>
           </div>
 
@@ -92,10 +91,10 @@ function App() {
               Alle Daten werden unter strenger Beachtung der EU-DSGVO,
               ausschließlich für vereinsinterne Zwecke vom Vorstand EDV-gestützt
               verarbeitet. Mit der Bestätigung der Mitgliedschaft erhalten Sie
-              eine Mitgliedsnummer, die Sie in den Überweisungen als
+              eine Mitgliedsnummer, welche Sie in den Überweisungen als
               Verwendungszweck angeben müssen. Bitte richten Sie einen
-              Dauerauftrag ein oder nutzen Sie das Formular für ein
-              Lastschriftmandat.
+              Dauerauftrag ein oder nutzen Sie das Formular um ein
+              Lastschriftmandat zu erteilen.
             </p>
           </div>
 

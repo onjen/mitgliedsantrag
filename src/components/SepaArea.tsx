@@ -8,8 +8,8 @@ function SepaArea() {
       <div>
         <p>
           Unsere Gläubiger-Identifikationsnummer: DE27ZZZ00002425162<br/>
-          Hier mit ermächtige ich, dass der Erfindergeist Jülich mittels Lastschrift die
-          im Antrag angekreuzte Zahlung einziehen darf. Zugleich weise ich mein
+          Hier mit ermächtige ich den Erfindergeist Jülich e.V. mittels Lastschrift die
+          im Antrag angekreuzte Zahlung einzuziehen. Zugleich weise ich mein
           Kreditinstitut an, die vom Erfindergeist Jülich e.V. auf mein Konto
           gezogene Lastschrift einzulösen.
         </p>
