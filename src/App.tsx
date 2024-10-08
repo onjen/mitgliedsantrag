@@ -103,10 +103,13 @@ function App() {
 
           <SignatureStack signatureKey="form" />
         
+          {/* NEW SITE */}
+          <div className="print-per-page" />
           <VolunteerArea />
           <AddressArea />
 
           {/* NEW SITE */}
+          <div className="print-per-page" />
           <SepaArea />
           <AddressArea />
 

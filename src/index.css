@@ -31,7 +31,6 @@ li {
 
 h1, h2 {
   color: #F9B338;
-  break-before: page; 
 }
 
 .only-Print {
@@ -42,6 +41,13 @@ h1, h2 {
   border: 1px solid black;
 }
 
+.print-per-page {
+  page-break-before: always;
+}
+
+.print-per-page:first-of-type {
+  page-break-before: avoid;
+}
 
 @media print {
   :root {
