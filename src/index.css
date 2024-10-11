@@ -1,6 +1,6 @@
 :root {
   font-family: Arial, sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   color-scheme: only light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -49,6 +49,14 @@ h1, h2 {
   page-break-before: avoid;
 }
 
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
 @media print {
   :root {
     font-size: 12pt;
@@ -63,11 +71,19 @@ h1, h2 {
     margin: 0;
   }
 
+  input, textarea {
+    padding: 0 !important;
+  }
+
   .no-print {
     display: none;
   }
 
   .only-Print {
     display: block;
-  }  
+  }
+  
+  .visible-on-print {
+    display: block;
+  }
 }
