@@ -1,23 +1,21 @@
 import { AllowedFormKeys } from "./models/AllowedFormKeys";
 
 export const allowedFormKeys = [
-  "Unternehmensname",
-  "Titel",
+  "Unternehmensname (bei Fördermitgliedschaft)",
+  "Titel (optional)",
   "Nachname",
   "Vorname",
   "Straße, Hausnummer",
   "PLZ, Ort",
-  "Telefon",
+  "Telefon (optional)",
   "E-Mail",
 ] as const;
 
 export const requiredFormKeys: Partial<AllowedFormKeys>[] = [
-  "Titel",
   "Nachname",
   "Vorname",
   "Straße, Hausnummer",
   "PLZ, Ort",
-  "Telefon",
   "E-Mail",
 ] as const;
 

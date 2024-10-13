@@ -15,10 +15,10 @@ function createData(key: string, name: string, month: number) {
 }
 
 const rows = [
-  createData("a", "- ordentliches Mitglied", 10),
-  createData("b", "- Förder Mitgliedschaft: 1. Natürliche Personen", 10),
-  createData("c", "- Förder Mitgliedschaft: 2. Juristische Personen", 15),
-  createData("d", "- Individuelle Förderung:", 0),
+  createData("a", "Ordentliches Mitglied", 10),
+  createData("b", "Fördermitgliedschaft: Natürliche Personen", 10),
+  createData("c", "Fördermitgliedschaft: Juristische Personen", 15),
+  createData("d", "Individuelle Förderung:", 0),
 ];
 
 interface ContributeTableProps {

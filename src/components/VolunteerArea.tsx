@@ -10,7 +10,7 @@ import {
 function VolunteerArea() {
   return (
     <>
-      <h2>Freiwillige angaben </h2>
+      <h2>Freiwillige Angaben </h2>
       <ul>
         <li>
           <FormControl variant="standard" fullWidth>
