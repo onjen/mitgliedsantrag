@@ -15,10 +15,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useAppStore } from "../stores/appStore";
 import { useShallow } from "zustand/shallow";
-import { Help, Print } from "@mui/icons-material";
-
-
-
+import { Article, Help, Print, Web } from "@mui/icons-material";
 const drawerWidth = 240;
 
 export default function DrawerAppBar() {
@@ -31,10 +28,17 @@ export default function DrawerAppBar() {
     ])
   );
   
-  const handleDrawerToggle = () => {
+  function handleDrawerToggle(): void {
     setMobileOpen((prevState) => !prevState);
   };
 
+  function handleImpressumClick(): void {
+    window.open("https://erfindergeist.org/impressum/", '_blank')!.focus()
+  }
+
+  function handleWebsiteClick(): void {
+    window.open("https://erfindergeist.org", '_blank')!.focus()
+  }
 
 
   const title = "Erfindergeist Jülich e.V. Mitgliedsantrag";
@@ -46,14 +50,24 @@ export default function DrawerAppBar() {
       </Typography>
       <Divider />
       <List>
+        <ListItem key={"print"} disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }} >
+            <ListItemText primary={"Drucken"} onClick={() => togglePrintModalIsOpen()}/>
+          </ListItemButton>
+        </ListItem>
         <ListItem key={"help"} disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText primary={"Hilfe"} onClick={() => toggleHelpModalIsOpen()}/>
           </ListItemButton>
         </ListItem>
-        <ListItem key={"print"} disablePadding>
+        <ListItem key={"Webseite"} disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText primary={"Drucken"} onClick={() => togglePrintModalIsOpen()}/>
+            <ListItemText primary={"Webseite"} onClick={() => handleWebsiteClick()}/>
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={"Impressum"} disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemText primary={"Impressum"} onClick={() => handleImpressumClick()}/>
           </ListItemButton>
         </ListItem>
       </List>
@@ -83,12 +97,20 @@ export default function DrawerAppBar() {
             {title}
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Button key={"print"} sx={{ color: "#000", backgroundColor: "#fff"}} onClick={() => togglePrintModalIsOpen()} endIcon={<Print />}>
+              Drucken
+            </Button>
             <Button key={"help"} sx={{ color: "#fff" }} onClick={() => toggleHelpModalIsOpen()} endIcon={<Help />}>
               Hilfe
             </Button>
-            <Button key={"print"} sx={{ color: "#fff" }} onClick={() => togglePrintModalIsOpen()} endIcon={<Print />}>
-              Drucken
+            <Button key={"Web"} sx={{ color: "#fff" }} onClick={() => handleWebsiteClick()} endIcon={<Web />}>
+              Webseite
             </Button>
+            <Button key={"Article"} sx={{ color: "#fff" }} onClick={() => handleImpressumClick()} endIcon={<Article />}>
+              Impressum
+            </Button>
+
+
           </Box>
         </Toolbar>
       </AppBar>
